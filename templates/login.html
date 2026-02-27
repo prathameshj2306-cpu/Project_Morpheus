@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Agritech | Secure Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+
+    <div class="bg-image"></div>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Agritech AI</h1>
+            <p>Predictive Intelligence for Modern Farming</p>
+        </div>
+
+        <form id="login-form">
+            <div class="input-group">
+                <label for="farmer-name">Farmer Name</label>
+                <input type="text" id="farmer-name" placeholder="e.g., Rajesh Kumar" required autocomplete="off">
+            </div>
+            
+            <div class="input-group">
+                <label for="mobile-number">Mobile Number</label>
+                <input type="tel" id="mobile-number" placeholder="+91 XXXXX XXXXX" pattern="[0-9\-\+\s\(\)]*" required autocomplete="off">
+            </div>
+
+            <button type="submit" class="login-btn">Secure Login →</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

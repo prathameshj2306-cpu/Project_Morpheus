@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChargeWalk Agritech | Price Forecast</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/price.css') }}">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand"><h2>KisanCore</h2></div>
+            <div class="user-profile">
+                <div class="avatar">👤</div>
+                <h3 id="sidebar-user-name">Farmer</h3>
+                <p>Farm Manager</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard" class="nav-item">📊 Dashboard</a>
+                <a href="/yield" class="nav-item">🌱 Predict Yield</a>
+                <a href="/price" class="nav-item active">📈 Price Forecasting</a>
+                <a href="/recommend" class="nav-item">💡 Crop Recommendation</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1>Market Price Forecast</h1>
+                    <p class="subtitle">AI-driven commodity pricing and Mandi analysis</p>
+                </div>
+            </header>
+
+            <div id="input-view" class="form-card active-view">
+                <form id="price-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>State</label>
+                            <select id="state-select" required>
+                                <option value="">-- Select State --</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>District</label>
+                            <select id="district-select" required disabled>
+                                <option value="">-- Select District --</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Crop</label>
+                            <select id="crop-select" required>
+                                <option value="">-- Select Crop --</option>
+                                <option value="Rice">Rice</option>
+                                <option value="Wheat">Wheat</option>
+                                <option value="Maize">Maize</option>
+                                <option value="Cotton">Cotton</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Month of Sale</label>
+                            <select id="month-select" required>
+                                <option value="">-- Select Month --</option>
+                                <option value="Jan">January</option> <option value="Feb">February</option>
+                                <option value="Mar">March</option>   <option value="Apr">April</option>
+                                <option value="May">May</option>     <option value="Jun">June</option>
+                                <option value="Jul">July</option>    <option value="Aug">August</option>
+                                <option value="Sep">September</option><option value="Oct">October</option>
+                                <option value="Nov">November</option><option value="Dec">December</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Year</label>
+                            <select id="year-select" required>
+                                <option value="2026">2026</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="primary-btn" id="forecast-btn">Generate Market Forecast →</button>
+                </form>
+            </div>
+
+            <div id="results-view" class="results-container hidden-view">
+                <button id="back-btn" class="secondary-btn mb-20">← Back to Inputs</button>
+
+                <div class="ai-box">
+                    <div class="ai-icon">🤖</div>
+                    <div class="ai-text">
+                        <h3>AI Recommendation: <span id="ai-decision" class="text-green">HOLD / WAIT</span></h3>
+                        <p id="ai-reasoning">Prices in your district are projected to rise by 4.2% over the next two months due to festive demand. Waiting is highly recommended for maximum profit.</p>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>3-Month Price Outlook (₹/Qtl)</h3>
+                        <div class="canvas-wrapper">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                        <p class="chart-caption">Projected pricing shows steady stability with a slight upward trend in the upcoming quarter.</p>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Nearby Mandi Comparison</h3>
+                        <div class="canvas-wrapper">
+                            <canvas id="mandiChart"></canvas>
+                        </div>
+                        <p class="chart-caption"><strong>Top Market:</strong> APMC Azadpur currently offers the highest rates, outperforming local village mandis by ₹150/Qtl.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/price.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChargeWalk Agritech | Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <h2>Agritech AI</h2>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar">👤</div>
+                <h3 id="sidebar-user-name">Loading...</h3>
+                <p>Farm Manager</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/dashboard" class="nav-item active">📊 Dashboard</a>
+                <a href="/yield" class="nav-item">🌱 Predict Yield</a>
+                <a href="/price" class="nav-item">📈 Price Forecasting</a>
+                <a href="/recommend" class="nav-item">💡 Crop Recommendation</a>
+            </nav>
+
+            <div class="sidebar-promo">
+                <p>Run full ML analysis on your crops.</p>
+                <button class="promo-btn" onclick="window.location.href='/yield'">+ New Prediction</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1 id="crop-title">Rice Overview</h1>
+                    <p class="subtitle">Crop Lifecycle & Market Data</p>
+                </div>
+                
+                <div class="crop-selector">
+                    <button class="crop-tab active" data-crop="rice">Rice</button>
+                    <button class="crop-tab" data-crop="wheat">Wheat</button>
+                    <button class="crop-tab" data-crop="maize">Maize</button>
+                    <button class="crop-tab" data-crop="cotton">Cotton</button>
+                </div>
+
+                <div class="year-selector">
+                    <select>
+                        <option>2026</option>
+                        <option>2025</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="info-grid">
+                <div class="conditions-panel">
+                    <div class="condition-card">
+                        <span class="icon">🌡️</span>
+                        <div>
+                            <p class="label">Ideal Temperature</p>
+                            <h3 id="val-temp">20 - 27 °C</h3>
+                        </div>
+                    </div>
+                    <div class="condition-card">
+                        <span class="icon">💧</span>
+                        <div>
+                            <p class="label">Ideal Water Level</p>
+                            <h3 id="val-water">100 - 200 cm</h3>
+                        </div>
+                    </div>
+                    <div class="condition-card">
+                        <span class="icon">🧪</span>
+                        <div>
+                            <p class="label">Ideal Soil pH</p>
+                            <h3 id="val-ph">5.5 - 6.5</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="financial-panel">
+                    <h3>Financial Statistics (Per Acre)</h3>
+                    <div class="finance-content">
+                        <div class="chart-box">
+                            <canvas id="financeChart"></canvas>
+                        </div>
+                        <div class="finance-stats">
+                            <p class="label">Expected Revenue</p>
+                            <h2 id="val-revenue">₹ 65,000</h2>
+                            <p class="label mt-10">Avg Input Cost</p>
+                            <h3 id="val-cost" style="color: #f44336;">₹ 25,000</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-panel">
+                <h3>Estimated Monthly Prices (₹ / Quintal)</h3>
+                <div class="main-chart-container">
+                    <canvas id="monthlyPriceChart"></canvas>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    
+</body>
+</html>

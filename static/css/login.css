@@ -1,0 +1,114 @@
+/* Reset default margins */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevents scrollbars on PC */
+}
+
+/* The Blurred Background */
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* REPLACE 'bg.jpg' with your actual cornfield image name! */
+    background-image: url('../images/bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(0.85); /* Blurs and slightly darkens the image so the white box pops */
+    transform: scale(1.05); /* Prevents blurry white edges */
+}
+
+/* The Floating Login Box */
+.login-container {
+    background: rgba(255, 255, 255, 0.90); /* Semi-transparent white */
+    backdrop-filter: blur(15px);
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 450px; /* Perfect width for PC */
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-header h1 {
+    color: #1b5e20;
+    font-size: 36px;
+    margin-bottom: 5px;
+    letter-spacing: -1px;
+}
+
+.login-header p {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+/* Form Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2e7d32;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    background: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #4CAF50;
+    background: #ffffff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1); /* Subtle green glow */
+}
+
+/* The Premium Button */
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(27, 94, 32, 0.3);
+}
