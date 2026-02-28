@@ -1007,12 +1007,14 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.innerHTML = `<div class="btn-loading"><div class="spinner"></div> Running AI...</div>`;
             btn.disabled = true;
 
+            const areaInput = document.getElementById('area-input').value;
+
             const payload = {
                 state: stateSelect.value,
                 district: districtSelect.value,
                 crop: document.getElementById('crop-select').value,
                 season: document.getElementById('season-select').value,
-                area: document.getElementById('area-input').value,
+                area: areaInput,
                 temp: document.getElementById('temp-input').value,
                 rain: document.getElementById('rain-input').value
             };
@@ -1025,9 +1027,27 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    document.getElementById('result-box').classList.remove('hidden');
-                    animateValue(document.getElementById('yield-output'), 0, data.prediction, 1500, " Tonnes");
-                    document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+                    
+                    // 1. Reveal the new split-layout box
+                    const resultContainer = document.getElementById('prediction-result');
+                    resultContainer.style.display = 'block';
+                    
+                    // 2. Do the Agronomy Math
+                    const areaValue = parseFloat(areaInput) || 1.0;
+                    const totalProduction = parseFloat(data.prediction);
+                    const yieldPerHa = totalProduction / areaValue;
+
+                    // 3. Update the text for the area
+                    document.getElementById('display-area').innerText = areaValue;
+
+                    // 4. Animate both numbers
+                    // Passing an empty string "" for the suffix because we already wrote "Tonnes/Ha" in the HTML!
+                    animateValue(document.getElementById('yield-per-ha'), 0, yieldPerHa, 1500, "");
+                    animateValue(document.getElementById('total-production'), 0, totalProduction, 1500, "");
+                    
+                    // 5. Scroll smoothly down to the results
+                    resultContainer.scrollIntoView({ behavior: 'smooth' });
+                    
                 } else {
                     showToast("AI Error: " + data.error, "error");
                 }

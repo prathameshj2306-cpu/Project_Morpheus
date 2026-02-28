@@ -493,6 +493,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // --- Recommendation Form Submit ---
+    // --- Recommendation Form Submit ---
     if (recommendForm) {
         recommendForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -502,13 +503,19 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.innerHTML = `<div class="btn-loading"><div class="spinner"></div> Analyzing Land Conditions...</div>`;
             btn.disabled = true;
 
+            // 1. Grab the area safely
+            const areaInput = document.getElementById('area-input');
+            const areaValue = areaInput && areaInput.value ? parseFloat(areaInput.value) : 1.0;
+
+            // 2. Add 'area' to the payload so Python gets it!
             const payload = {
                 state: stateSelect.value,
                 district: districtSelect.value,
                 season: document.getElementById('season-select').value,
                 soil: document.getElementById('soil-select').value,
                 temp: document.getElementById('temp-input').value || 25.0,
-                rain: document.getElementById('rain-input').value || 100.0
+                rain: document.getElementById('rain-input').value || 100.0,
+                area: areaValue 
             };
 
             fetch('/api/recommend_crop', {
@@ -534,13 +541,11 @@ document.addEventListener("DOMContentLoaded", function() {
                         reasonEl.innerText = `Based on ${payload.season} season data and your soil type, the AI has identified this as the highest revenue-generating crop for ${payload.district}.`;
                     }
 
-                    // Calculate Metrics & Animate
-                    const areaInput = document.getElementById('area-input');
-                    const area = areaInput && areaInput.value ? parseFloat(areaInput.value) : 1; 
-                    
-                    const estimatedYield = area * 4.2; 
-                    const estimatedPrice = 2250; 
-                    const estimatedRevenue = estimatedYield * 10 * estimatedPrice; 
+                    // 3. USE THE REAL DATA FROM PYTHON!
+                    // Instead of hardcoding 2250, we use data.est_price
+                    const estimatedYield = data.est_yield; 
+                    const estimatedPrice = data.est_price; 
+                    const estimatedRevenue = data.total_revenue; 
 
                     animateValue(document.getElementById('rec-yield'), 0, estimatedYield, 1500, "", " Tonnes");
                     animateValue(document.getElementById('rec-price'), 0, estimatedPrice, 1500, "₹", "/ Qtl");

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Agritech | Recommend Crop</title>
+    <style>
+    /* Make sure the chat box can align items left and right */
+    .chat-history {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* AI Message - Aligned Left */
+    .bot-msg {
+        align-self: flex-start !important;
+        background-color: #e8f5e9;
+        color: #1b5e20;
+        padding: 12px 18px;
+        border-radius: 15px 15px 15px 0px;
+        margin-bottom: 15px;
+        max-width: 80%;
+        font-size: 15px;
+        line-height: 1.5;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    /* User Message - Aligned Right */
+    .user-msg {
+        align-self: flex-end !important;
+        background-color: #e3f2fd;
+        color: #0d47a1;
+        padding: 12px 18px;
+        border-radius: 15px 15px 0px 15px;
+        margin-bottom: 15px;
+        max-width: 80%;
+        font-size: 15px;
+        line-height: 1.5;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+</style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recommend.css') }}">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand"><h2>KisanCore</h2></div>
+            <div class="user-profile">
+                <div class="avatar">👤</div>
+                <h3 id="sidebar-user-name">Farmer</h3>
+                <p>Farm Manager</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard" class="nav-item">📊 Dashboard</a>
+                <a href="/yield" class="nav-item">🌱 Predict Yield</a>
+                <a href="/price" class="nav-item">📈 Price Forecasting</a>
+                <a href="/recommend" class="nav-item active">💡 Crop Recommendation</a>
+                <a href="/bot" class="nav-item">💬 Ask Agri-Expert</a>
+            </nav>
+        </aside>
+
+        <div class="expert-chat-container" style="background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 700px; margin: 0 auto;">
+    <h3 style="color: #2e7d32; text-align: center; margin-top: 0;">👨‍🌾 Ask Morpheus AI</h3>
+    
+    <div id="chat-history" class="chat-history" style="height: 400px; overflow-y: auto; margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px; display: flex; flex-direction: column;">
+        <div class="bot-msg" style="background: #e8f5e9; color: #1b5e20; padding: 12px; border-radius: 15px 15px 15px 0px; margin-bottom: 10px; max-width: 80%;">Hello! I am your AI Agronomist. Ask me anything about your crops, fertilizers, or weather!</div>
+    </div>
+
+    <div class="faq-chips" style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; justify-content: center;">
+        <button class="faq-chip" style="background: #eee; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; font-weight: bold;" onclick="fillQuestion('What is the best fertilizer for wheat?')">Best fertilizer?</button>
+        <button class="faq-chip" style="background: #eee; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; font-weight: bold;" onclick="fillQuestion('How much water does rice need?')">Water needs?</button>
+        <button class="faq-chip" style="background: #eee; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; font-weight: bold;" onclick="fillQuestion('How to protect crops from pests?')">Pest control?</button>
+    </div>
+
+    <div class="chat-input-area" style="display: flex; gap: 10px;">
+        <input type="text" id="expert-question" placeholder="Ask a farming question..." onkeypress="handleEnter(event)" style="flex: 1; padding: 15px; border: 1px solid #ccc; border-radius: 30px; outline: none;">
+        <button id="send-btn" onclick="askExpert()" style="background: #2e7d32; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 20px;">🔍</button>
+    </div>
+</div>
+    </div>
+
+    
+    <script src="{{ url_for('static', filename='js/bot.js') }}"></script>
+</body>
+</html>

@@ -22,6 +22,7 @@
                 <a href="/yield" class="nav-item active">🌱 Predict Yield</a>
                 <a href="/price" class="nav-item">📈 Price Forecasting</a>
                 <a href="/recommend" class="nav-item">💡 Crop Recommendation</a>
+                <a href="/bot" class="nav-item">💬 Ask Agri-Expert</a>
             </nav>
         </aside>
 
@@ -102,12 +103,28 @@
                     </div>
                 </form>
 
-                <div id="result-box" class="result-box hidden">
-                    <h3>Predicted Yield Output</h3>
-                    <h1 id="yield-output">--</h1>
-                    <p>Estimated production based on current parameters.</p>
+                <div id="prediction-result" class="results-container" style="display: none; margin-top: 30px;">
+                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                        
+                        <div style="background: #f9fbe7; border: 1px solid #c5e1a5; border-radius: 12px; padding: 25px; text-align: center; flex: 1; min-width: 200px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                            <h4 style="margin: 0; color: #555; font-size: 16px;">🌱 Yield Rate</h4>
+                            <div style="font-size: 32px; font-weight: bold; color: #33691e; margin: 15px 0;">
+                                <span id="yield-per-ha">0.00</span> <span style="font-size: 16px; font-weight: normal;">Tonnes/Ha</span>
+                            </div>
+                            <p style="margin: 0; font-size: 13px; color: #777;">Production efficiency</p>
+                        </div>
+                
+                        <div style="background: #e8f5e9; border: 2px dashed #2e7d32; border-radius: 12px; padding: 25px; text-align: center; flex: 1; min-width: 250px; box-shadow: 0 4px 10px rgba(46, 125, 50, 0.15);">
+                            <h4 style="margin: 0; color: #2e7d32; font-size: 18px;">🚜 Total Estimated Production</h4>
+                            <div style="font-size: 40px; font-weight: bold; color: #1b5e20; margin: 15px 0;">
+                                <span id="total-production">0.00</span> <span style="font-size: 20px; font-weight: normal;">Tonnes</span>
+                            </div>
+                            <p style="margin: 0; font-size: 14px; color: #555;">Based on <span id="display-area" style="font-weight: bold;">0</span> Hectares of land</p>
+                        </div>
+                
+                    </div>
                 </div>
-            </div>
+                </div>
         </main>
     </div>
 
